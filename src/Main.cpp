@@ -1,4 +1,5 @@
 #include "Platform/Platform.hpp"
+#include "BubbleSortClass.cpp"
 
 int main()
 {
@@ -12,17 +13,11 @@ int main()
 	// in Windows at least, this must be called before creating the window
 	float screenScalingFactor = platform.getScreenScalingFactor(window.getSystemHandle());
 	// Use the screenScalingFactor
-	window.create(sf::VideoMode(200.0f * screenScalingFactor, 200.0f * screenScalingFactor), "SFML works!");
+	window.create(sf::VideoMode(800.0f * screenScalingFactor, 400.0f * screenScalingFactor), "Bubble Sort Baby!");
 	platform.setIcon(window.getSystemHandle());
 
-	sf::CircleShape shape(window.getSize().x / 2);
-	shape.setFillColor(sf::Color::White);
-
-	sf::Texture shapeTexture;
-	shapeTexture.loadFromFile("content/sfml.png");
-	shape.setTexture(&shapeTexture);
-
 	sf::Event event;
+	BubbleSort bubbles(window.getSize().x, window.getSize().y, 200, &window);
 
 	while (window.isOpen())
 	{
@@ -33,8 +28,8 @@ int main()
 		}
 
 		window.clear();
-		window.draw(shape);
-		window.display();
+		bubbles.Draw();
+		bubbles.Sort();
 	}
 
 	return 0;
